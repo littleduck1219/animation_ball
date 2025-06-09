@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import useCanvasApp from "./useCanvasApp";
+import Ball from "./Ball";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const { canvas, ctx, stageWidth, stageHeight, startAnimation, stopAnimation } = useCanvasApp();
+
+    return (
+        <div className='App'>
+            <canvas ref={canvas} />
+            {stageWidth > 0 && stageHeight > 0 && (
+                <Ball
+                    radius={30}
+                    speed={15}
+                    stageWidth={stageWidth}
+                    stageHeight={stageHeight}
+                    ctx={ctx}
+                    startAnimation={startAnimation}
+                    stopAnimation={stopAnimation}
+                />
+            )}
+        </div>
+    );
 }
 
 export default App;
