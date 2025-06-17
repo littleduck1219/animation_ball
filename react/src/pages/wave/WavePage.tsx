@@ -3,5 +3,5 @@ import useCanvasApp from "../../hooks/useCanvasApp";
 
 export default function WavePage() {
     const { canvas, ctx, stageWidth, stageHeight, startAnimation, stopAnimation } = useCanvasApp();
-    return <div></div>;
+    return <div>wave</div>;
 }
