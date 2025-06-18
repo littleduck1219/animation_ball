@@ -21,7 +21,7 @@ export class Wave {
             this.init();
         } else {
             for (let i = 0; i < this.totalPoints; i++) {
-                const point = this.points[i];
+                const point = this.points[i]; 
                 point.x = this.pointGap * i;
                 point.fixedY = this.centerY;
             }
