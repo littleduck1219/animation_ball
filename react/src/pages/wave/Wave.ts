@@ -1,47 +1,76 @@
 import React from "react";
 import { Point } from "./Point";
 
-type Props = {
+export class Wave {
+    points: Point[] = [];
     index: number;
     totalPoints: number;
     color: string;
-};
+    stageWidth: number = 0;
+    stageHeight: number = 0;
+    centerX: number = 0;
+    centerY: number = 0;
+    pointGap: number = 0;
 
-type Points = {
-    x: number;
-    y: number;
-    fixedY: number;
-}[];
+    constructor(index: number, totalPoints: number, color: string) {
+        this.index = index;
+        this.totalPoints = totalPoints;
+        this.color = color;
+    }
 
-export default function Wave(props: Props) {
-    const { index, totalPoints, color } = props;
-    const points: Points = [];
+    resize(stageWidth: number, stageHeight: number) {
+        this.stageWidth = stageWidth;
+        this.stageHeight = stageHeight;
 
-    const resize = (stageWidth: number, stageHeight: number) => {
-        const centerX = stageWidth / 2;
-        const centerY = stageHeight / 2;
+        this.centerX = stageWidth / 2;
+        this.centerY = stageHeight / 2;
 
-        const pointGap = stageWidth / (totalPoints - 1);
+        this.pointGap = this.stageWidth / (this.totalPoints - 1);
 
-        if (points.length === 0) {
-            init();
+        if (this.points.length === 0) {
+            this.init();
         } else {
-            for (let i = 0; i < totalPoints; i++) {
-                const point = points[i];
-                point.x = pointGap * i;
-                point.fixedY = centerY;
-            }
+            this.points.forEach((point, i) => {
+                point.x = this.pointGap * i;
+                point.fixedY = this.centerY;
+            });
         }
-    };
+    }
 
-    const init = () => {
-        for (let i = 0; i < totalPoints; i++) {
-            const point = new Point(index + i, pointGap * i, centerY);
-            points.push(point);
+    init() {
+        for (let i = 0; i < this.totalPoints; i++) {
+            const point = new Point(this.index + i, this.pointGap * i, this.centerY);
+            this.points.push(point);
         }
-    };
+    }
 
-    return {
-        resize,
-    };
+    draw(ctx: CanvasRenderingContext2D) {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+
+        this.points[0].update();
+        let prevX = this.points[0].x;
+        let prevY = this.points[0].y;
+
+        ctx.moveTo(prevX, prevY);
+
+        for (let i = 1; i < this.totalPoints; i++) {
+            const point = this.points[i];
+            point.update();
+
+            const cx = (prevX + point.x) / 2;
+            const cy = (prevY + point.y) / 2;
+
+            ctx.quadraticCurveTo(prevX, prevY, cx, cy);
+
+            prevX = point.x;
+            prevY = point.y;
+        }
+
+        ctx.lineTo(prevX, prevY);
+        ctx.lineTo(this.stageWidth, this.stageHeight);
+        ctx.lineTo(this.points[0].x, this.stageHeight);
+        ctx.fill();
+        ctx.closePath();
+    }
 }
