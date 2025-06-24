@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+import "./tutorialMain.css";
 import CSSBasicAnimations from "./css/CSSBasicAnimations";
 
 type TabContentType = {
@@ -43,16 +44,23 @@ export default function TutorialMain() {
     };
 
     return (
-        <div>
-            <div>
-                <h1>Animation Practice</h1>
+        <div className='animation-tutorial-page'>
+            <h1>Animation Practice</h1>
+
+            <div className='button-wrapper'>
+                {tabContents.map((content) => (
+                    <button
+                        key={content.id}
+                        className={`tab-button ${tabState === content.id ? "active" : ""}`}
+                        onClick={() => tabChangeHandler(content.id)}>
+                        {content.label}
+                    </button>
+                ))}
             </div>
 
-            {tabContents.map((content) => (
-                <button onClick={() => tabChangeHandler(content.id)}>{content.label}</button>
-            ))}
-
-            {tabContents.find((content) => tabState === content.id)?.node}
+            <div className='content-wrapper'>
+                {tabContents.find((content) => tabState === content.id)?.node}
+            </div>
         </div>
     );
 }
