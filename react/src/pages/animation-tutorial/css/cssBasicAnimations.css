@@ -1,0 +1,22 @@
+.animations-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.demo-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.scale-box {
+    width: 64px;
+    height: 64px;
+    background-color: #3b82f6;
+    transition: transform 0.5s ease-in-out;
+}
+
+.scaled {
+    transform: scale(1.5);
+}
