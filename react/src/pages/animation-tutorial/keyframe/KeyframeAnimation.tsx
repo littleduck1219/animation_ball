@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./cssBasicAnimations.css";
+import "./keyframeAnimation.css";
 
-type DemoType = "scale" | "translate" | "rotate" | "opacity" | "hover" | null;
+type DemoType = "pulse" | "bounce" | "rotate" | "opacity" | "hover" | null;
 
-export default function CSSBasicAnimations() {
+export default function KeyframeAnimation() {
     const [activeDemo, setActiveDemo] = useState<DemoType>(null);
 
     const toggleDemo = (demo: DemoType) => {
@@ -12,48 +12,61 @@ export default function CSSBasicAnimations() {
 
     return (
         <>
-            {/* 1. SCALE */}
+            {/* 1. PULSE */}
             <div className='demo-section'>
-                <h3>1. Scale Animation</h3>
+                <h3>1. Pulse Animation</h3>
 
                 <div className='demo-controls'>
                     <button
-                        className={`demo-button ${activeDemo === "scale" ? "active" : ""}`}
-                        onClick={() => toggleDemo("scale")}>
-                        Toggle Scale
+                        className={`demo-button ${activeDemo === "pulse" ? "active" : ""}`}
+                        onClick={() => toggleDemo("pulse")}>
+                        Toggle pulse
                     </button>
                     <div
-                        className={`demo-box scale-box ${activeDemo === "scale" ? "scaled" : ""}`}
+                        className={`demo-box pulse-box ${activeDemo === "pulse" ? "pulsed" : ""}`}
                     />
                 </div>
 
                 <div className='demo-code'>
                     <pre>{`css
 
-    .scale-box {
+    .pulse-box {
         transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-        &.scaled {
-            transform: scale(1.5);
+        &.pulsed {
+            animation: pulse-animation 1s ease-in-out infinite;
+        }
+    }
+
+    @keyframes pulse-animation {
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(1.2);
+            opacity: 0.7;
         }
     }
         `}</pre>
                 </div>
             </div>
 
-            {/* 2. TRANSLATE */}
+            {/* 2. BOUNCE */}
             <div className='demo-section'>
-                <h3>2. Translate Animation</h3>
+                <h3>2. Bounce Animation</h3>
 
                 <div className='demo-controls'>
                     <button
-                        className={`demo-button ${activeDemo === "translate" ? "active" : ""}`}
-                        onClick={() => toggleDemo("translate")}>
+                        className={`demo-button ${activeDemo === "bounce" ? "active" : ""}`}
+                        onClick={() => toggleDemo("bounce")}>
                         Toggle Scale
                     </button>
                     <div
-                        className={`demo-box translate-box ${
-                            activeDemo === "translate" ? "translated" : ""
+                        className={`demo-box bounce-box ${
+                            activeDemo === "bounce" ? "bounced" : ""
                         }`}
                     />
                 </div>

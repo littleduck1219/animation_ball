@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import "./tutorialMain.css";
 import CSSBasicAnimations from "./css/CSSBasicAnimations";
+import KeyframeAnimation from "./keyframe/KeyframeAnimation";
 
 type TabContentType = {
     id: number;
@@ -20,7 +21,7 @@ export default function TutorialMain() {
         {
             id: 1,
             label: "CSS Keyframes",
-            node: <CSSBasicAnimations />,
+            node: <KeyframeAnimation />,
         },
         {
             id: 2,
@@ -59,7 +60,9 @@ export default function TutorialMain() {
             </div>
 
             <div className='content-wrapper'>
-                {tabContents.find((content) => tabState === content.id)?.node}
+                <div className='animation-container'>
+                    {tabContents.find((content) => tabState === content.id)?.node}
+                </div>
             </div>
         </div>
     );
