@@ -26,17 +26,17 @@ export default function TutorialMain() {
         {
             id: 2,
             label: "Ref Basic",
-            node: <CSSBasicAnimations />,
+            node: <></>,
         },
         {
             id: 3,
             label: "RAF Basic",
-            node: <CSSBasicAnimations />,
+            node: <></>,
         },
         {
             id: 4,
             label: "Special",
-            node: <CSSBasicAnimations />,
+            node: <></>,
         },
     ];
 

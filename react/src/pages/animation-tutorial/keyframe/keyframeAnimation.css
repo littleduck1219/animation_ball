@@ -44,3 +44,19 @@
         transform: translateY(-4px);
     }
 }
+
+/* Rotate Animation */
+.rotate-box {
+    &.rotated {
+        animation: rotate-animation 1s linear infinite;
+    }
+}
+
+@keyframes rotate-animation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -74,14 +74,31 @@ export default function KeyframeAnimation() {
                 <div className='demo-code'>
                     <pre>{`css
 
-    .translate-box {
-        transition: transform 1s ease-in-out;
-
-        &.translated {
-            transform: translateX(10rem);
+    .bounce-box {
+        &.bounced {
+            animation: bounce-animation 1s ease-in-out infinite;
         }
     }
 
+    @keyframes bounce-animation {
+        0%,
+        20%,
+        53%,
+        80%,
+        100% {
+            transform: translateY(0);
+        }
+        40%,
+        43% {
+            transform: translateY(-30px);
+        }
+        70% {
+            transform: translateY(-15px);
+        }
+        90% {
+            transform: translateY(-4px);
+        }
+    }
         `}</pre>
                 </div>
             </div>
@@ -106,10 +123,17 @@ export default function KeyframeAnimation() {
                 <div className='demo-code'>
                     <pre>{`css
 
-    .translate-box {
-        transition: transform 1s ease-in-out;
+    .rotate-box {
+        &.bounced {
+            animation: rotate-animation 1s ease-in-out infinite;
+        }
+    }
 
-        &.translated {
+    @keyframes rotate-animation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
             transform: rotate(360deg);
         }
     }
